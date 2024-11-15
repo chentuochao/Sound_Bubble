@@ -1,0 +1,94 @@
+{
+    "project_name": "Dis_Sep_Syn",
+    "pl_logger": "src.pl_modules.distance_based_pl_module.DistanceBasedLogger",
+    "pl_module": "src.hl_modules.distance_based_hl_module.PLModule",
+    "pl_module_args": {
+        "metrics":["snr_i", "si_snr_i", "si_sdr_i"],
+        "model": "src.models.tfgridnet_realtime_clean_dis_embd3.net.Net",
+        "model_params": {
+            "stft_chunk_size": 192,
+            "stft_pad_size": 96,
+            "num_ch": 6,
+            "D": 32,
+            "L": 4,
+            "I": 1,
+            "J": 1,
+            "B": 6,
+            "H": 64,
+            "E": 2,
+            "local_atten_len": 100,
+            "use_attn": false,
+            "lookahead": true,
+            "chunk_causal": true,
+            "use_first_ln": true,
+            "merge_method": "early_cat",
+            "conv_lstm": false,
+	    "dis_type": "conv3"
+	},
+        "samples_per_speaker_number":5,
+        "optimizer":"torch.optim.Adam",
+        "optimizer_params":{
+            "lr":1.2e-3
+        },
+        "loss":"src.losses.SNRLP.SNRLPLoss",
+        "loss_params":{
+            "snr_loss_name":"snr",
+	        "neg_weight":100
+	    },
+        "scheduler":"torch.optim.lr_scheduler.ReduceLROnPlateau",
+            "scheduler_params":{
+                "mode":"min",
+                "patience":8,
+                "factor":0.5,
+                "min_lr":1e-6
+            },
+            "sr":24000
+    },
+    "grad_clip": 1,
+    "train_dataset": "src.datasets.general_multisrc_dataset_dis_embed.Dataset",
+    "train_data_args": {
+        "dataset_dirs":[
+            {
+                "path":"/scr/syn_1m/train",
+                "max_samples":10000
+            },
+	    {
+                "path":"/scr/syn_1_5m/train",
+                "max_samples":10000
+            },
+	    {	
+                "path":"/scr/syn_2m/train",
+                "max_samples":10000
+            }
+        ],
+        "prob_neg":0,
+        "mic_config":["mic00", "mic01", "mic02", "mic03", "mic04", "mic05"],
+        "downsample":1,
+        "perturbations":[]
+    },
+    "val_dataset": "src.datasets.general_multisrc_dataset_dis_embed.Dataset",
+    "val_data_args": {
+        "dataset_dirs":[
+             {
+                "path":"/scr/syn_1m/val",
+                "max_samples":1000
+            },
+	    {
+                "path":"/scr/syn_1_5m/val",
+                "max_samples":1000
+            },
+	    {	
+                "path":"/scr/syn_2m/val",
+                "max_samples":1000
+            }
+         
+        ],
+        "prob_neg":0,
+        "mic_config":["mic00", "mic01", "mic02", "mic03", "mic04", "mic05"],
+        "downsample":1
+    },
+    "epochs": 200,
+    "batch_size": 8,
+    "eval_batch_size": 12,
+    "num_workers": 16
+}

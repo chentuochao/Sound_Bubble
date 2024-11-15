@@ -1,0 +1,113 @@
+{
+    "pl_logger": "src.pl_modules.distance_based_pl_module.DistanceBasedLogger",
+    "pl_module": "src.hl_modules.distance_based_hl_module.PLModule",
+    "pl_module_args": {
+        "metrics":["snr_i", "si_snr_i", "si_sdr_i"],
+	    "init_ckpt":"RASPBERRYPI_PRETRAIN_MODEL/checkpoints/last.pt",
+        "model": "src.models.tfgridnet_realtime_clean_optim.net.Net",
+        "model_params": {
+            "stft_chunk_size": 192,
+            "stft_pad_size": 96,
+            "num_ch": 6,
+            "D": 16,
+            "L": 4,
+            "I": 1,
+            "J": 1,
+            "B": 3,
+            "H": 64,
+            "E": 2,
+            "conv_lstm":true,
+	    "lstm_down":5,
+            "local_atten_len": 50,
+            "use_attn": false,
+            "lookahead": true,
+            "chunk_causal": true,
+            "use_first_ln": true,
+            "merge_method": "early_cat"
+        },
+        "samples_per_speaker_number":5,
+        "optimizer":"torch.optim.Adam",
+        "optimizer_params":{
+            "lr":2e-3
+        },
+        "loss":"src.losses.MultiResoLoss.MultiResoFuseLoss",                                                                                  
+        "loss_params":{                                                                                                                       
+                "l1_ratio":10,                                                                                                                
+                "sample_rate": 24000,                                                                                                         
+                "perceptual_weighting": true,
+                "w_sc" : 0,
+                "w_log_mag": 0,
+                "w_lin_mag": 20
+        },
+        "scheduler":"torch.optim.lr_scheduler.ReduceLROnPlateau",
+        "scheduler_params":{
+            "mode":"min",
+            "patience":8,
+            "factor":0.5,
+            "min_lr":1e-6
+        },
+        "sr":24000,
+        "grad_clip": 1
+    },
+    "train_dataset": "src.datasets.general_multisrc_dataset_with_perturbations.Dataset",
+    "train_data_args": {
+        "dataset_dirs":[
+            {
+                "path":"/scr/HumanMultiTargetWHAM/omni/train",
+                "max_samples":20000
+            }
+        ],
+        "dis_threshold":1.5,
+        "mic_config":["mic00", "mic01", "mic02", "mic03", "mic04", "mic05"],
+        "downsample":1,
+        "perturbations":[
+            {
+                "type":"src.datasets.perturbations.SampleShiftPerturbation.SampleShiftPerturbation",
+                "params":{
+                    "max_shift":4
+                },
+                "prob":0.4
+            },
+            {
+                "type":"src.datasets.perturbations.SpeedPerturbation.SpeedPerturbation",
+                "params":{
+                    "min_speed":0.8,
+                    "max_speed":1.2
+                },
+                "prob":0.4
+            },
+            {
+                "type":"src.datasets.perturbations.FrequencyMaskingPerturbation.FrequencyMaskingPerturbation",
+                "params":{
+                    "min_freq_masks":1,
+                    "max_freq_masks":512
+                },
+                "prob":0.4
+            },
+            {
+                "type":"src.datasets.perturbations.ChannelGainPerturbation.ChannelGainPerturbation",
+                "params":{
+                    "max_channel_gain_db":2
+                },
+                "prob":0.4
+            }
+        ]
+    },
+    "val_dataset": "src.datasets.general_multisrc_dataset_with_perturbations.Dataset",
+    "val_data_args": {
+        "dataset_dirs":[
+            {
+                "path":"/scr/HumanMultiTargetWHAM/omni/val",
+                "max_samples":2000
+            }
+        ],
+        "dis_threshold":1.5,
+        "prob_neg":0,
+        "mic_config":["mic00", "mic01", "mic02", "mic03", "mic04", "mic05"],
+        "downsample":1
+    },
+    "epochs":200,
+    "batch_size": 8,
+    "eval_batch_size": 8,
+    "num_workers": 16
+}

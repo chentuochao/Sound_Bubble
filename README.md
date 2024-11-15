@@ -50,6 +50,9 @@ Download the [VCTK](https://datashare.ed.ac.uk/handle/10283/2651), [LIBRITTS](ht
 python generate_adaptive_dataset.py VCTK_DATASET_DIRECTORY FOLDER_TO_SAVE --dis_threshold bubble_size --n_outputs_test 2000 --n_outputs_train 10000 --n_outputs_val 2000 --seed 12 --bg_voice_dir WHAM_DATASET_DIRECTORY --tts_dir LIBRITTS_DATASET_DIRECTORY
 ```
 
+### Realworld dataset preparation
+The real-world dataset and checkpoints are available upon request. Please fill this form.
+
 ### Model training 
 To train the our model, we need (1) unzip the dataset we provide and specify the dataset path in the experiment json file (2) prepare the experiment json files for training configuration (example in ./syn_experiments and ./real_experiments) (3)  train with the following scripts:
 ```
