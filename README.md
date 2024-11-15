@@ -1,6 +1,11 @@
 # Sound bubbles on hearables
 The source code for Nature Electronics Paper "Sound bubbles on hearables" [paper_link](https://www.nature.com/articles/s41928-024-01276-z.epdf?sharing_token=UBEcecaT-LOl28bRvGeUHNRgN0jAjWel9jnR3ZoTv0MI_xnp258ClQYuXnq4ROtijwv-jc3byDg5-F2vswnmmIlGNpSLsyxq4V72UEIWzmeKFbUI8XzLC8-DV5LB4nhalyrysnXenNHfMmw9RATWLqfYyBJys5frFCnFNmAiaU8%3D)
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/VaGnfQcpopQ/0.jpg)](https://www.youtube.com/watch?v=VaGnfQcpopQ)
+
+## Abstract 
+The human auditory system has a limited ability to perceive distance and distinguish speakers in crowded settings. A headset technology that can create a sound bubble in which all speakers within the bubble are audible, but speakers and noise outside the bubble are suppressed, could augment human hearing. However, developing such technology is challenging. Here we report an intelligent headset system capable of creating sound bubbles. The system is based on real-time neural networks that use acoustic data from up to six microphones integrated into noise-cancelling headsets and are run on-device, processing 8 ms audio chunks in 6.36 ms on an embedded central processing unit. Our neural networks can generate sound bubbles with programmable radii between 1 and 2 meters, and with output signals that reduce the intensity of sounds outside the bubble by 49 decibels. With previously unseen environments and wearers, our system can focus on up to two speakers within the bubble with one to two interfering speakers and noise outside the bubble.
+
 
 ## Code structure
 
