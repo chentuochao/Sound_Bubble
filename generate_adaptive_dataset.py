@@ -839,10 +839,6 @@ def main(args: argparse.Namespace):
                 n_inside = 1
             else:
                 n_inside = 2
-            #:print(i, total_num, args.n_inside)
-
-            # generate_sample(voices_list, tts_list, noise_list, args, subdir, i+ args.start_index)
-            # exit(0)
             pool.apply_async(generate_sample,
                             args=(voices_list, tts_list, noise_list, n_inside, args, subdir, i + args.start_index),
                              callback=callback_fn,
@@ -866,13 +862,13 @@ if __name__ == '__main__':
     parser.add_argument('--tts_dir',
                         type=str,
                         default = None,
-                        help="Directory with LibriTTS files")
+                        help="Directory path for LibriTTS files")
 
 
     parser.add_argument('--bg_voice_dir',
                         type=str,
                         default = None,
-                        help="Directory with noise wav files")
+                        help="Directory path for WHAM! noise wav files")
 
     parser.add_argument('--split_path2',
                         type=str,
@@ -881,6 +877,7 @@ if __name__ == '__main__':
     parser.add_argument('--split_path',
                         type=str,
                         default='datasets/vctk_split.json')
+                        
     parser.add_argument('--n_mics', type=int, default=6)
 
     # parser.add_argument('--n_inside', type=int, default=2)
