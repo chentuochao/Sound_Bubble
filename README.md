@@ -1,11 +1,11 @@
-# Speech_Bubble on hearable 
-The source code for "Sound bubbles on hearables for enhanced hearing" 
+# Sound bubbles on hearables
+The source code for Nature Electronics Paper "Sound bubbles on hearables" [paper_link](https://www.nature.com/articles/s41928-024-01276-z.epdf?sharing_token=UBEcecaT-LOl28bRvGeUHNRgN0jAjWel9jnR3ZoTv0MI_xnp258ClQYuXnq4ROtijwv-jc3byDg5-F2vswnmmIlGNpSLsyxq4V72UEIWzmeKFbUI8XzLC8-DV5LB4nhalyrysnXenNHfMmw9RATWLqfYyBJys5frFCnFNmAiaU8%3D)
 
 
-### Code structure
+## Code structure
 
 ### datasets
-The files for dataset splitting.
+The files for dataset splitting. 
 
 ### src 
 It includes the training and testing scripts for our model. 
