@@ -6,31 +6,6 @@ The source code for Nature Electronics Paper "Sound bubbles on hearables" [paper
 ## Abstract 
 The human auditory system has a limited ability to perceive distance and distinguish speakers in crowded settings. A headset technology that can create a sound bubble in which all speakers within the bubble are audible, but speakers and noise outside the bubble are suppressed, could augment human hearing. However, developing such technology is challenging. Here we report an intelligent headset system capable of creating sound bubbles. The system is based on real-time neural networks that use acoustic data from up to six microphones integrated into noise-cancelling headsets and are run on-device, processing 8 ms audio chunks in 6.36 ms on an embedded central processing unit. Our neural networks can generate sound bubbles with programmable radii between 1 and 2 meters, and with output signals that reduce the intensity of sounds outside the bubble by 49 decibels. With previously unseen environments and wearers, our system can focus on up to two speakers within the bubble with one to two interfering speakers and noise outside the bubble.
 
-
-## Code structure
-
-### datasets
-The files for dataset splitting. 
-
-### src 
-It includes the training and testing scripts for our model. 
-
-### edge 
-Convert the pytorch model to ONNX model
-
-### helpers
-Some utility functions
-
-###  real_experiments
-Experiment/Model configuration files for real-world experiment
-
-### syn_experiments
-Experiment/Model configuration files for synthetic experiment
-
-### generate_adaptive_dataset.py
-The script to generate the synthetic dataset
-
-
 ## Running instruction
 
 ### Setting up
@@ -39,8 +14,8 @@ Please note that most scripts require you to use a GPU with CUDA capabilities. W
 If this is your first time running the code, create the environment and install the required modules.
 
 ```
-conda create --name speech_bubble python=3.8
-conda activate speech_bubble
+conda create --name sound_bubble python=3.8
+conda activate sound_bubble
 pip install -r requirements2.txt
 ```
 After initial setup, source.sh should activate the environment and add the working directory to your python path. (May not work on Windows/Mac, instead, simply copy and paste the commands inside into the terminal).
@@ -48,8 +23,9 @@ After initial setup, source.sh should activate the environment and add the worki
 source setup.sh
 ``` 
 
-### Test some examples
+### Play with some examples
 Run the code to test some synthetic samples for differennt bubble sizes:
+Download the [checkpoint](https://drive.google.com/drive/folders/1-nrTNefY6wWJzgP4WKEEDByIAqrkQ_ku?usp=share_link) for synthetic dataset
 ```
 python src/test_samples.py ./test_samples/syn_1m/ ./TFG_S_big_newdis_v3_pt_fix_MutiLoss/  --distance_threshold 1 --use_cuda
 python src/test_samples.py ./test_samples/syn_1_5m/ ./TFG_S_big_newdis_v3_pt_fix_MutiLoss/  --distance_threshold 1.5 --use_cuda
@@ -79,3 +55,27 @@ For real-world data testing,
 ```
 python src/eval.py TEST_SET_PATH DIRECTORY_TO_SAVE_MODEL DIRECTORY_TO_SAVE_RESULT --use_cuda 
 ```
+
+
+## Code structure
+
+### datasets
+The files for dataset splitting. 
+
+### src 
+It includes the training and testing scripts for our model. 
+
+### edge 
+Convert the pytorch model to ONNX model
+
+### helpers
+Some utility functions
+
+###  real_experiments
+Experiment/Model configuration files for real-world experiment
+
+### syn_experiments
+Experiment/Model configuration files for synthetic experiment
+
+### generate_adaptive_dataset.py
+The script to generate the synthetic dataset
