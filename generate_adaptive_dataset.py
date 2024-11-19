@@ -919,4 +919,3 @@ if __name__ == '__main__':
     parser.add_argument('--duration', type=float, default=5)
 
     main(parser.parse_args())
-
