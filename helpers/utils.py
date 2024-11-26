@@ -97,8 +97,10 @@ def read_audio_file(file_path, sr):
     """
     return librosa.core.load(file_path, mono=False, sr=sr)[0]
 
-def read_audio_file_torch(file_path):
+def read_audio_file_torch(file_path, downsample=1):
     waveform, sample_rate = torchaudio.load(file_path)
+    if downsample >1:
+        waveform = torchaudio.functional.resample(waveform, sample_rate, sample_rate//downsample)
     return waveform
 
 
