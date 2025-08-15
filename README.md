@@ -14,7 +14,7 @@ The human auditory system has a limited ability to perceive distance and disting
 
 ### 2. $\color{red}{\textsf{Generalize}}$ to realworld unseen enviroments and wearers in presence of reverbration, motion and noise. Check the real-world end-to-end demo in our [webpage](https://soundbubble.cs.washington.edu). 
 
-### 3. The $\color{red}{\textsf{real-world}}$ dataset and checkpoints are available upon request. Please fill this form.
+### 3. The $\color{red}{\textsf{real-world}}$ dataset [here](https://drive.google.com/file/d/1_YViupiN3Vy0TVOxqbKo46bQnzHGJf-4/view?usp=sharing).
 
 ## Running instruction
 
@@ -51,7 +51,7 @@ python generate_adaptive_dataset.py VCTK_DATASET_DIRECTORY FOLDER_TO_SAVE --dis_
 ```
 
 ### Realworld dataset preparation
-The real-world dataset and checkpoints are available upon request. Please fill this form.
+The real-world dataset is available [here](https://drive.google.com/file/d/1_YViupiN3Vy0TVOxqbKo46bQnzHGJf-4/view?usp=sharing).
 
 ### Model training 
 To train the our model, we need (1) unzip the dataset we provide and specify the dataset path in the experiment json file (2) prepare the experiment json files for training configuration (example in ./syn_experiments and ./real_experiments) (3)  train with the following scripts:
